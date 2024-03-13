@@ -18,7 +18,23 @@ const routes: Routes = [
   {
     path: 'deck',
     loadChildren: () => import('./deck/deck.module').then( m => m.DeckPageModule)
+  },  {
+    path: 'pdv',
+    loadChildren: () => import('./pdv/pdv.module').then( m => m.PdvPageModule)
+  },
+  {
+    path: 'contaspagar',
+    loadChildren: () => import('./contaspagar/contaspagar.module').then( m => m.ContaspagarPageModule)
+  },
+  {
+    path: 'contasreceber',
+    loadChildren: () => import('./contasreceber/contasreceber.module').then( m => m.ContasreceberPageModule)
+  },
+  {
+    path: 'fluxocaixa',
+    loadChildren: () => import('./fluxocaixa/fluxocaixa.module').then( m => m.FluxocaixaPageModule)
   }
+
 ];
 
 @NgModule({
