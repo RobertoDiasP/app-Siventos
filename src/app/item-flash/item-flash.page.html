@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Itens</ion-title>
+    <ion-button (click)="embaralharItens()" slot="end">Ordenar</ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let item of Card; let i = index">
+    <div class="card" *ngIf="!item.visivel">  
+      <ion-card-header>
+        <ion-card-title style="font-size: 24px;" >{{item.id}}- {{item.titulo}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content style="font-size: 18px;">
+        {{item.conteudo}}
+      </ion-card-content>
+      
+        <ion-button color="danger" (click)="ocultarCard(i,1)">
+          Dificil
+        </ion-button>
+        <ion-button color="" (click)="ocultarCard(i,2)">
+          Médio
+        </ion-button>
+        <ion-button color="success" (click)="ocultarCard(i,3)">
+          Facil
+        </ion-button>
+    </div>
+    
+  </ion-card>
+</ion-content>

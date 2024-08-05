@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>pessoas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-input [(ngModel)]="nome" label="Nome"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="pesquisar()">Pesquisar</ion-button>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="cpf" label="CPF"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-button (click)="pesquisarCPF()">Pesquisarcpf</ion-button>
+  </ion-item>
+</ion-content>

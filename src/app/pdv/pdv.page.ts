@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-pdv',
@@ -6,10 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pdv.page.scss'],
 })
 export class PdvPage implements OnInit {
+  empresas: any
 
-  constructor() { }
+  constructor(
+      private auth: ApiService
+  ) { }
 
   ngOnInit() {
+
   }
+
+  
 
 }
