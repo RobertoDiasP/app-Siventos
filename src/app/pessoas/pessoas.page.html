@@ -1,20 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pessoas</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Pessoas</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+
   <ion-item>
-    <ion-input [(ngModel)]="nome" label="Nome"></ion-input>
+    <ion-row>
+      <ion-col size="8">
+        <ion-input [(ngModel)]="nome" label="Nome"></ion-input>
+      </ion-col>
+      <ion-col size="4">
+        <ion-select label="" placeholder="">
+          <ion-select-option value="apple">Nome</ion-select-option>
+          <ion-select-option value="banana">CPF</ion-select-option>
+        </ion-select>    
+      </ion-col>
+    </ion-row>
+    
   </ion-item>
-  <ion-item>
-    <ion-button (click)="pesquisar()">Pesquisar</ion-button>
-  </ion-item>
-  <ion-item>
-    <ion-input [(ngModel)]="cpf" label="CPF"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-button (click)="pesquisarCPF()">Pesquisarcpf</ion-button>
-  </ion-item>
+  
+  
 </ion-content>
