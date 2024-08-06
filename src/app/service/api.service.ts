@@ -35,6 +35,11 @@ export class ApiService {
     });
   }
 
+  addPessoa(pessoa: any): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.post(`${this.url}/api/pessoasCadastro`, pessoa, { headers });
+  }
+
   getCPF(cpf: string) {
     const headers = this.getHeaders();
     return this.http.get(`${this.url}/api/cpf`, { 

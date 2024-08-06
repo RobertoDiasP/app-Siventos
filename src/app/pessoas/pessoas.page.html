@@ -4,6 +4,9 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Pessoas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="setOpen(true)"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,17 +16,67 @@
   <ion-item>
     <ion-row>
       <ion-col size="8">
-        <ion-input [(ngModel)]="nome" label="Nome"></ion-input>
+        <ion-input [(ngModel)]="nome" label="Pessoa"></ion-input>
       </ion-col>
       <ion-col size="4">
-        <ion-select label="" placeholder="">
-          <ion-select-option value="apple">Nome</ion-select-option>
-          <ion-select-option value="banana">CPF</ion-select-option>
-        </ion-select>    
+        <ion-select [(ngModel)]="selectedOption" label="" placeholder="">
+          <ion-select-option value="nome">Nome</ion-select-option>
+          <ion-select-option value="cpf">CPF</ion-select-option>
+        </ion-select>
       </ion-col>
     </ion-row>
-    
+
   </ion-item>
-  
-  
+  <ion-item>
+    <ion-button (click)="pesquisar()">
+      Pesquisar
+    </ion-button>
+  </ion-item>
+
+
+  <ion-list>
+    <ion-card *ngFor="let pessoa of dadopesquisa">
+      <ion-card-header>
+        <ion-card-title>{{ pessoa.RAZAOSOCIAL }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Código Pessoa:</strong> {{ pessoa.CODIGOPESSOA }}</p>
+        <p><strong>Email:</strong> {{ pessoa.EMAIL }}</p>
+        <p><strong>Telefone:</strong> {{ pessoa.TELEFONE1 }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Cadastrar Pessoa</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false)">Voltar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+
+        <form>
+          <ion-item>
+            <ion-input label="Nome" labelPlacement="floating" placeholder="" [(ngModel)]="cadastro.RAZAOSOCIAL" name="nome"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="CPF" labelPlacement="floating" placeholder="" [(ngModel)]="cadastro.CPF" name="cpf"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Telefone" labelPlacement="floating" placeholder="" [(ngModel)]="cadastro.TELEFONE1" name="telefone"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input label="Vínculo" labelPlacement="floating" placeholder="" name="vinculo"></ion-input>
+          </ion-item>
+          <ion-button expand="full" size="small" color="success" (click)="salvarCadastro()">Salvar</ion-button>
+        </form>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
