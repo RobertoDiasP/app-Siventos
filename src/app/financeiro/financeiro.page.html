@@ -16,7 +16,19 @@
     </ion-item>
   </ion-list>
 
+<ion-row>
+  <ion-col>
+    
+  </ion-col>
+  <ion-col>
+    <canvas id="myChart" width="200" height="100"></canvas>
+  </ion-col>
+  <ion-col>
+
+  </ion-col>
+</ion-row>
   
+
 
   <ion-button expand="block" color="success" (click)="toggleInfiniteScroll()">
     {{ showInfiniteScroll ? 'Esconder' : 'Mostrar' }} Quitadas
@@ -24,12 +36,41 @@
 
   <div *ngIf="showInfiniteScroll">
     <ion-list>
-      <ion-item *ngFor="let item of items; let index = index">
-        <ion-avatar slot="start">
-          <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-        </ion-avatar>
-        <ion-label>{{ item }}</ion-label>
-      </ion-item>
+      
+        <ion-card *ngFor="let item of data; let index = index">
+          <ion-card-content>   
+            <ion-row>
+              <ion-col>
+                <ion-label>Empresa: {{ item.CODIGOEMPRESA }}</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Lançamento: {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
+              </ion-col>
+            </ion-row>
+
+
+            <ion-row>
+              <ion-col>
+                <ion-label>Total: {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
+              </ion-col>
+              <ion-col>
+                <ion-label>Rec: {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col>
+                <ion-label>Tipo: {{ item.TIPO_COBRANCA }} </ion-label>    
+              </ion-col>
+              <ion-col>
+                <ion-label>Vec: {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
+              </ion-col>
+            </ion-row>
+            
+          </ion-card-content>
+        </ion-card>
+      
+      
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
@@ -42,12 +83,39 @@
 
   <div *ngIf="showInfiniteScrollPagar">
     <ion-list>
-      <ion-item *ngFor="let item of items; let index = index">
-        <ion-avatar slot="start">
-          <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
-        </ion-avatar>
-        <ion-label>{{ item }}</ion-label>
-      </ion-item>
+      <ion-card *ngFor="let item of dataR; let index = index">
+        <ion-card-content>   
+          <ion-row>
+            <ion-col>
+              <ion-label>Empresa: {{ item.CODIGOEMPRESA }}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Lançamento: {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
+            </ion-col>
+          </ion-row>
+
+
+          <ion-row>
+            <ion-col>
+              <ion-label>Total: {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>Rec: {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <ion-label>Tipo: {{ item.TIPO_COBRANCA }} </ion-label>    
+            </ion-col>
+            <ion-col>
+              <ion-label>Vec: {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
+            </ion-col>
+          </ion-row>
+          
+        </ion-card-content>
+      </ion-card>
+    
     </ion-list>
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import { ApiService } from '../service/api.service';
+
 
 @Component({
   selector: 'app-financeiro',
@@ -8,8 +10,11 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
   styleUrls: ['./financeiro.page.scss'],
 })
 export class FinanceiroPage implements OnInit {
+
+  chart: any;
   id: any
   razao:any
+  resultadoPesq: any
   items = [{
     "CODIGOPESSOA": "00108",
     "EMAIL": "",
@@ -295,17 +300,37 @@ export class FinanceiroPage implements OnInit {
 ];
   showInfiniteScroll: any;
   showInfiniteScrollPagar: any;
+  data: any;
+  dataR:any;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+    public Api: ApiService,
+   
+  ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.razao = this.route.snapshot.paramMap.get('razao');
-    
+    this.createChart();
   }
 
   private generateItems() {
     
+  }
+
+  getDados(status:string){
+    this.Api.getFinPessoa(this.id, status).subscribe(response => {
+      this.resultadoPesq = response
+      if(status == 'QUITADO'){
+        this.data = this.resultadoPesq[0]
+      }else{
+        this.dataR =this.resultadoPesq[0]
+      }
+
+      console.log(this.data,'aqui esta os dados financeiros')
+    }, error => {
+      // Lógica para tratar erros
+    });
   }
 
   onIonInfinite(ev: any) {
@@ -316,11 +341,76 @@ export class FinanceiroPage implements OnInit {
   }
 
   toggleInfiniteScroll() {
+    console.log(this.data)
     this.showInfiniteScroll = !this.showInfiniteScroll;
+    if(!this.data){
+      this.getDados('QUITADO')
+    }
+
   }
 
   toggleInfiniteScrollPagar() {
+    console.log(this.dataR)
     this.showInfiniteScrollPagar = !this.showInfiniteScrollPagar;
+    if(!this.dataR){
+      this.getDados('ABERTO')
+    }
   }
 
+  formatNumber(value: string): string {
+    // Converte a string para número e remove os dígitos após o ponto decimal
+    const number = parseInt(value.split('.')[0], 10);
+    return number.toString();
+  }
+
+  createChart() {
+    const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+
+    new (window as any)['Chart'](ctx, {
+      type: 'pie', // Altere o tipo do gráfico para 'pie'
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+          label: 'My Dataset',
+          data: [12, 19, 3, 5, 2, 3], // Dados para cada segmento
+          backgroundColor: [        // Cores diferentes para cada segmento
+            'rgba(255, 99, 132, 0.2)', 
+            'rgba(54, 162, 235, 0.2)', 
+            'rgba(255, 206, 86, 0.2)', 
+            'rgba(75, 192, 192, 0.2)', 
+            'rgba(153, 102, 255, 0.2)', 
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [            // Cores da borda para cada segmento
+            'rgba(255, 99, 132, 1)', 
+            'rgba(54, 162, 235, 1)', 
+            'rgba(255, 206, 86, 1)', 
+            'rgba(75, 192, 192, 1)', 
+            'rgba(153, 102, 255, 1)', 
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,         // Faz o gráfico responder ao tamanho da tela
+        plugins: {
+          legend: {
+            position: 'top',       // Posiciona a legenda no topo
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context: any) {
+                let label = context.label || '';
+                if (context.parsed) {
+                  label += `: ${context.parsed} units`;
+                }
+                return label;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
 }

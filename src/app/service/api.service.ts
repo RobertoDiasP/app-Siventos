@@ -56,6 +56,14 @@ export class ApiService {
     });
   }
 
+  getFinPessoa(id: string, status: string) {
+    const headers = this.getHeaders();
+    return this.http.get(`${this.url}/api/pessoaFinId`, { 
+      headers, 
+      params: { id: id , aberto_quitado: status }
+    }); 
+  }
+
   login(email: string, password: string): Observable<{ token: string }> {
     const payload = { email, password }; // Ajuste o payload conforme necessário
     return this.http.post<{ token: string }>(`${this.url}/api/login`, payload).pipe(
