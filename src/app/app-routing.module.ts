@@ -46,9 +46,14 @@ const routes: Routes = [
   {
     path: 'item-flash/:id',
     loadChildren: () => import('./item-flash/item-flash.module').then( m => m.ItemFlashPageModule)
-  },  {
+  },
+  {
     path: 'pessoas',
     loadChildren: () => import('./pessoas/pessoas.module').then( m => m.PessoasPageModule)
+  },
+  {
+    path: 'financeiro/:id/:razao',
+    loadChildren: () => import('./financeiro/financeiro.module').then( m => m.FinanceiroPageModule)
   }
 
 

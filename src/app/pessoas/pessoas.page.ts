@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../service/api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class PessoasPage implements OnInit {
   dadosDetalhe: any
   isModalOpen = false;
   isDetail = false
+  data: any;
   cadastro = {
     RAZAOSOCIAL: '',
     STATUS: 'A',
@@ -25,7 +27,7 @@ export class PessoasPage implements OnInit {
     EMAIL:''
   };
   constructor(public Api: ApiService,
-    
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class PessoasPage implements OnInit {
     if(isOpen == true){
       this.Api.getPessoaId(id).subscribe(response => {
         this.dadosDetalhe = response
+        this.data = this.dadosDetalhe[0][0]
         console.log(response)
       }, error => {
         // Lógica para tratar erros
@@ -64,6 +67,10 @@ export class PessoasPage implements OnInit {
         this.dadopesquisa = response
       });
     }
+  }
+
+  financeiro(id: any, razao: any){
+    this.router.navigate(['/financeiro', id, razao]);
   }
 
   salvarCadastro() {

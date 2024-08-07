@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Financeiro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list lines="full">
+    <ion-item>
+      <ion-label>
+        <p>{{id}}- {{razao}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  
+
+  <ion-button expand="block" color="success" (click)="toggleInfiniteScroll()">
+    {{ showInfiniteScroll ? 'Esconder' : 'Mostrar' }} Quitadas
+  </ion-button>
+
+  <div *ngIf="showInfiniteScroll">
+    <ion-list>
+      <ion-item *ngFor="let item of items; let index = index">
+        <ion-avatar slot="start">
+          <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+        </ion-avatar>
+        <ion-label>{{ item }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+  <ion-button expand="block" color="danger" (click)="toggleInfiniteScrollPagar()">
+    {{ showInfiniteScrollPagar ? 'Esconder' : 'Mostrar' }} Abertas
+  </ion-button>
+
+  <div *ngIf="showInfiniteScrollPagar">
+    <ion-list>
+      <ion-item *ngFor="let item of items; let index = index">
+        <ion-avatar slot="start">
+          <img [src]="'https://picsum.photos/80/80?random=' + index" alt="avatar" />
+        </ion-avatar>
+        <ion-label>{{ item }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+
+
+
+</ion-content>

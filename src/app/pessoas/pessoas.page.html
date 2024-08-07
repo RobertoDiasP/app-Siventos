@@ -27,11 +27,11 @@
     </ion-row>
 
   </ion-item>
-  <ion-item>
-    <ion-button (click)="pesquisar()">
+  
+    <ion-button size="small" expand="block" (click)="pesquisar()">
       Pesquisar
     </ion-button>
-  </ion-item>
+  
 
 
   <ion-list>
@@ -44,9 +44,15 @@
         <p><strong>Email:</strong> {{ pessoa.EMAIL }}</p>
         <p><strong>Telefone:</strong> {{ pessoa.TELEFONE1 }}</p>
       </ion-card-content>
-      <ion-button (click)="detailOpen(true, pessoa.CODIGOPESSOA)">
-        Detalhes
-      </ion-button>
+      <ion-item>
+
+        <ion-button size="small" expand="block" (click)="detailOpen(true, pessoa.CODIGOPESSOA)">
+          Detalhes
+        </ion-button>
+        <ion-button size="small" slot="end" color="warning" (click)="financeiro(pessoa.CODIGOPESSOA, pessoa.RAZAOSOCIAL)">
+          Financeiro
+        </ion-button>
+      </ion-item>
     </ion-card>
   </ion-list>
 
@@ -95,23 +101,57 @@
       </ion-header>
       <ion-content class="ion-padding">
         
-        <ion-card *ngIf="dadosDetalhe">
-          <ion-card-header>
-            <ion-card-title>{{ dadosDetalhe.RAZAOSOCIAL }}</ion-card-title>
-          </ion-card-header>
-      
-          <ion-card-content>
-            <ion-list>
-              <ion-item>
-                <ion-label>
-                  <strong>Código Pessoa:</strong>
-                  <p>{{ dadosDetalhe.CODIGOPESSOA }}</p>
-                </ion-label>
-              </ion-item>
-              <!-- Adicione os outros campos aqui -->
-            </ion-list>
-          </ion-card-content>
-        </ion-card>
+        <ion-list lines="full">
+          <ion-item>
+            <ion-label><p>Status: {{ data.STATUS }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Avalista: {{ data.AVALISTA }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Celular: {{ data.CELULAR }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Cidade: {{ data.CIDADE }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>CPF: {{ data.CPF }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>CPF Avalista: {{ data.CPF_AVALISTA }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>CPF Representante: {{ data.CPF_REPRESENTANTE }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Nome F.: {{ data.NOMEFANTASIA }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Obs: {{ data.OBSERVACAO }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Razao.: {{ data.RAZAOSOCIAL }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Representante: {{ data.REPRESENTANTE }}</p></ion-label>
+          </ion-item>
+          <!-- adicionar função que abre o whatsapp -->
+          <ion-item>
+            <ion-label><p>Telefone 1: {{ data.TELEFONE1 }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Telefone 2: {{ data.TELEFONE2 }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Telefone 3: {{ data.TELEFONE3 }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Telefone 4: {{ data.TELEFONE4 }}</p></ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label><p>Telefone 5: {{ data.TELEFONE5 }}</p></ion-label>
+          </ion-item>
+        </ion-list>
 
       </ion-content>
     </ng-template>
