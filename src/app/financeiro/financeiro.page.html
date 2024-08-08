@@ -14,18 +14,24 @@
         <p>{{id}}- {{razao}}</p>
       </ion-label>
     </ion-item>
+    <ion-item>
+      <ion-label>
+        <p>Devido {{totalR | currency:'BRL':'symbol':'1.2-2'}}</p>
+      </ion-label>
+      <ion-label>
+        <p>pago {{totalQ | currency:'BRL':'symbol':'1.2-2'}}</p>
+      </ion-label>
+      <ion-label>
+        <p>Total: {{totalS | currency:'BRL':'symbol':'1.2-2'}}</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
 
-<ion-row>
-  <ion-col>
-    
-  </ion-col>
-  <ion-col>
+<ion-row style="padding: 50px;" >
+  
     <canvas id="myChart" width="200" height="100"></canvas>
-  </ion-col>
-  <ion-col>
+  
 
-  </ion-col>
 </ion-row>
   
 
@@ -37,7 +43,7 @@
   <div *ngIf="showInfiniteScroll">
     <ion-list>
       
-        <ion-card *ngFor="let item of data; let index = index">
+        <ion-card *ngFor="let item of dataQ; let index = index">
           <ion-card-content>   
             <ion-row>
               <ion-col>

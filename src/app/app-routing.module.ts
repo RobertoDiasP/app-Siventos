@@ -54,7 +54,11 @@ const routes: Routes = [
   {
     path: 'financeiro/:id/:razao',
     loadChildren: () => import('./financeiro/financeiro.module').then( m => m.FinanceiroPageModule)
+  },  {
+    path: 'eventos',
+    loadChildren: () => import('./eventos/eventos.module').then( m => m.EventosPageModule)
   }
+
 
 
 ];

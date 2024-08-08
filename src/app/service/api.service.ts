@@ -56,11 +56,11 @@ export class ApiService {
     });
   }
 
-  getFinPessoa(id: string, status: string) {
+  getFinPessoa(id: string) {
     const headers = this.getHeaders();
     return this.http.get(`${this.url}/api/pessoaFinId`, { 
       headers, 
-      params: { id: id , aberto_quitado: status }
+      params: { id: id }
     }); 
   }
 
@@ -72,7 +72,23 @@ export class ApiService {
       })
     );
   }
+
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  getEvento(eventoAno:any, codigoEvento:any){
+    const headers = this.getHeaders();
+    if(codigoEvento =='vazio'){
+      return this.http.get(`${this.url}/api/eventoBusca`, { 
+        headers, 
+        params: { eventoAno: eventoAno }
+      });
+    }else{
+      return this.http.get(`${this.url}/api/eventoBusca`, { 
+        headers, 
+        params: { eventoCodigo: codigoEvento }
+      });
+    }
   }
 }
