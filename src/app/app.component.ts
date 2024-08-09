@@ -9,7 +9,7 @@ export class AppComponent {
     { title: 'Home', url: '/home', icon: 'home' },
     { title: 'Pessoas', url: '/pessoas', icon: 'person' },
     { title: 'Eventos', url: '/eventos', icon: 'school' },
-    { title: 'PDV', url: '/pdv', icon: 'cube' },
+    { title: 'Agenda', url: '/agenda', icon: 'calendar' },
     { title: 'C. Receber', url: '/contasreceber', icon: 'bag-add' },
     { title: 'C. Pagar', url: '/contaspagar', icon: 'bag-remove' },
     { title: 'Fluxo Caixa', url: '/fluxocaixa', icon: 'file-tray-full' },

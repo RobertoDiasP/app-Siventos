@@ -1,0 +1,89 @@
+<ion-content>
+  <ion-item>
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <ion-button fill="clear" (click)="prevMonth()" class="prev-month">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <span class="month-year">{{ monthYear }}</span>
+        <ion-button fill="clear" (click)="nextMonth()" class="next-month">
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="calendar">
+        <div class="weekdays">
+          <div>DOM</div>
+          <div>SEG</div>
+          <div>TER</div>
+          <div>QUA</div>
+          <div>QUI</div>
+          <div>SEX</div>
+          <div>SAB</div>
+        </div>
+        <div class="days">
+          <div 
+            *ngFor="let day of days" 
+            [ngClass]="{
+              'today': day.today, 
+              'other-month': day.otherMonth, 
+              'meeting': day.event?.type === 'meeting',
+              'holiday': day.event?.type === 'holiday',
+              'birthday': day.event?.type === 'birthday'
+            }"
+            (click)="selectEvent(day)">
+            {{ day.day }}
+            <div *ngIf="day.event" class="event-title">{{ day.event.title }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="calendar-footer">
+        <span class="year">{{ year }}</span>
+      </div>
+  
+      
+    </div>
+  </ion-item>
+
+    <!-- Card do Evento Selecionado -->
+    <ion-card *ngIf="selectedEvent">
+      <ion-card-header>
+        <ion-card-title>{{ selectedEvent.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Data: {{ selectedEvent.date | date:'fullDate' }}</p>
+        <p>Tipo: {{ selectedEvent.type }}</p>
+        <p>{{ selectedEvent.description }}</p>
+      </ion-card-content>
+    </ion-card>
+  
+
+    <div *ngIf="showForm">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ isEditMode ? 'Edit Event' : 'New Event' }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form (ngSubmit)="handleSave()">
+            <ion-item>
+              <ion-label>Title</ion-label>
+              <ion-input [(ngModel)]="currentEvent.title" name="title"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tipo</ion-label>
+              <ion-input [(ngModel)]="currentEvent.type" name="title"></ion-input>
+            </ion-item>
+            <!-- <ion-item> -->
+              <!-- <ion-label>Date</ion-label> -->
+              <!-- <ion-datetime [(ngModel)]="currentEvent.date" name="date"></ion-datetime> -->
+            <!-- </ion-item> -->
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-textarea [(ngModel)]="currentEvent.description" name="description"></ion-textarea>
+            </ion-item>
+            <ion-button expand="full" type="submit">Save</ion-button>
+            <ion-button expand="full" color="light" (click)="handleCancel()">Cancel</ion-button>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+</ion-content>

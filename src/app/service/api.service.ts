@@ -91,4 +91,19 @@ export class ApiService {
       });
     }
   }
+
+  getPessoaEvento(evento:any){
+    const headers = this.getHeaders();
+    return this.http.get(`${this.url}/api/eventoPessoa`,{
+      headers,
+      params: { codigoevento:evento }
+    })
+  }
+  getEventoFin(evento:any){
+    const headers = this.getHeaders();
+    return this.http.get(`${this.url}/api/eventoFin`,{
+      headers,
+      params: { codigoevento:evento }
+    })
+  }
 }

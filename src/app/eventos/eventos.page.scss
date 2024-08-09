@@ -49,3 +49,10 @@
     color: white;
     text-align: center;
   }
+  .item-light {
+    --background: #ffffff; /* Cor normal */
+  }
+  
+  .item-dark {
+    --background: #f0f0f0; /* Cinza claro */
+  }
