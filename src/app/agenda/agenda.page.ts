@@ -26,9 +26,9 @@ export class AgendaPage implements OnInit {
   selectedEvent: CalendarEvent | null = null;
 
   events: CalendarEvent[] = [
-    { date: new Date(2020, 3, 23), type: 'meeting', title: 'Reunião com equipe', description: 'Discussão sobre o projeto XYZ.' },
-    { date: new Date(2020, 3, 25), type: 'holiday', title: 'Feriado Nacional', description: 'Feriado nacional comemorativo.' },
-    { date: new Date(2020, 3, 28), type: 'birthday', title: 'Aniversário de João', description: 'Festa de aniversário de João.' }
+    { date: new Date(2024, 7, 23), type: 'meeting', title: 'Reunião com equipe', description: 'Discussão sobre o projeto XYZ.' },
+    { date: new Date(2024, 7, 25), type: 'holiday', title: 'Feriado Nacional', description: 'Feriado nacional comemorativo.' },
+    { date: new Date(2024, 7, 28), type: 'birthday', title: 'Aniversário de João', description: 'Festa de aniversário de João.' }
   ];
   currentEvent: any;
 

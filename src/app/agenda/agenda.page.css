@@ -1,5 +1,4 @@
 /* agenda.page.scss */
-
 ion-content {
   --ion-background-color: #f7f7f7;
   display: flex;
@@ -106,4 +105,4 @@ ion-content {
 .event-card {
   margin-top: 20px;
   text-align: left;
-}
+}/*# sourceMappingURL=agenda.page.css.map */

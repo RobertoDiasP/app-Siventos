@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),  
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),canActivate: [AuthGuard],  
   },
   {
     path: 'deck',
@@ -25,42 +25,47 @@ const routes: Routes = [
   },
   {
     path: 'contaspagar',
-    loadChildren: () => import('./contaspagar/contaspagar.module').then( m => m.ContaspagarPageModule)
+    loadChildren: () => import('./contaspagar/contaspagar.module').then( m => m.ContaspagarPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'contasreceber',
-    loadChildren: () => import('./contasreceber/contasreceber.module').then( m => m.ContasreceberPageModule)
+    loadChildren: () => import('./contasreceber/contasreceber.module').then( m => m.ContasreceberPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'fluxocaixa',
-    loadChildren: () => import('./fluxocaixa/fluxocaixa.module').then( m => m.FluxocaixaPageModule)
+    loadChildren: () => import('./fluxocaixa/fluxocaixa.module').then( m => m.FluxocaixaPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'nova-pagina',
-    loadChildren: () => import('./nova-pagina/nova-pagina.module').then( m => m.NovaPaginaPageModule)
+    loadChildren: () => import('./nova-pagina/nova-pagina.module').then( m => m.NovaPaginaPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'flashcards',
-    loadChildren: () => import('./flashcards/flashcards.module').then( m => m.FlashcardsPageModule)
+    loadChildren: () => import('./flashcards/flashcards.module').then( m => m.FlashcardsPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'item-flash/:id',
-    loadChildren: () => import('./item-flash/item-flash.module').then( m => m.ItemFlashPageModule)
+    loadChildren: () => import('./item-flash/item-flash.module').then( m => m.ItemFlashPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'pessoas',
-    loadChildren: () => import('./pessoas/pessoas.module').then( m => m.PessoasPageModule)
+    loadChildren: () => import('./pessoas/pessoas.module').then( m => m.PessoasPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'financeiro/:id/:razao',
-    loadChildren: () => import('./financeiro/financeiro.module').then( m => m.FinanceiroPageModule)
-  },  {
+    loadChildren: () => import('./financeiro/financeiro.module').then( m => m.FinanceiroPageModule),canActivate: [AuthGuard]
+  },
+  {
     path: 'eventos',
-    loadChildren: () => import('./eventos/eventos.module').then( m => m.EventosPageModule)
+    loadChildren: () => import('./eventos/eventos.module').then( m => m.EventosPageModule),canActivate: [AuthGuard]
   },
   {
     path: 'agenda',
-    loadChildren: () => import('./agenda/agenda.module').then( m => m.AgendaPageModule)
+    loadChildren: () => import('./agenda/agenda.module').then( m => m.AgendaPageModule),canActivate: [AuthGuard]
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 
 

@@ -14,9 +14,11 @@ export class ApiService {
   private getHeaders(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders({
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMjc5OTcxOSwianRpIjoiZjY0NWZhMzQtZWQzNi00MGFmLWFlZDAtMTJiMTE2NjI1NWI5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InVzZXJAZXhhbXBsZS5jb20iLCJuYmYiOjE3MjI3OTk3MTksImNzcmYiOiJmZGM3MWJhZi01YjQ0LTRjNmEtODdmMC1kMTRjZjI4N2JjNWUiLCJleHAiOjE3MjI4MDA2MTl9.lPdEjTe516HKm4j863kBXE2SnTaL53Udha7y16d7RNs`
+      'Authorization': `Bearer ${token}`
     });
   }
+
+  
 
   getFlashCards(id:any){
     return this.http.get(`${this.url}/flashcards/${id}`)

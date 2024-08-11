@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-
 import { IonicModule } from '@ionic/angular';
 
-import { AgendaPageRoutingModule } from './agenda-routing.module';
+import { LoginPageRoutingModule } from './login-routing.module';
 
-import { AgendaPage } from './agenda.page';
+import { LoginPage } from './login.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgendaPageRoutingModule,
-  
+    LoginPageRoutingModule
   ],
-  declarations: [AgendaPage]
+  declarations: [LoginPage]
 })
-export class AgendaPageModule {}
+export class LoginPageModule {}
