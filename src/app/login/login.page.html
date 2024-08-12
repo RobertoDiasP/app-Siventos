@@ -1,23 +1,59 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item>
-      <ion-input label="Login" placeholder="Login"  [(ngModel)]="login"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-input label="Senha" type="password" [(ngModel)]="senha" ></ion-input>
-    </ion-item>
-  </ion-list>
+  <img alt="Silhouette of mountains" src="../../assets/imagem/img-login.jpg" />
 
-  
+  <ion-row>
+    <ion-col>
+      
+    </ion-col>
+    <ion-col class="avatar">
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="../../assets/imagem/logoOriginallis.png" />
+      </ion-avatar>
+    </ion-col>
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="mt-5">
+    <ion-col>
+      
+    </ion-col>
+    <ion-col size="10">
+      <ion-list>
+        <ion-item>
+          <ion-input
+           label="CNPJ" placeholder=""  [(ngModel)]="formattedCNPJ"
+           (ionInput)="applyMask($event)"
+           (ionBlur)="validateCNPJ()"
+           placeholder=""></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input label="Login" placeholder=""  [(ngModel)]="login"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input label="Senha" type="password" [(ngModel)]="senha" ></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+    <ion-col>
+
+    </ion-col>
+  </ion-row>
     <ion-button  expand="block" (click)="logar()">login   <ion-spinner *ngIf="spiner"></ion-spinner></ion-button>
-  
+  <ion-row>
+    <ion-col>
+    </ion-col>
+    <ion-col size="8">
+      <h6>
+        <a href="">Esqueceu a senha?</a>
+      </h6>
+    </ion-col>
+    <ion-col>
+    </ion-col>
+  </ion-row>
   
     <!-- <ion-spinner *ngIf="spiner"></ion-spinner> -->
   

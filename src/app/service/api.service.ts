@@ -108,4 +108,13 @@ export class ApiService {
       params: { codigoevento:evento }
     })
   }
+
+  getAgendaEventos(datai: any, dataf:any){
+    const headers = this.getHeaders();{
+      return this.http.get(`${this.url}/api/agenda`,{
+        headers,
+        params: {dataInicio: datai, dataFim: dataf}
+      })
+    }
+  }
 }
