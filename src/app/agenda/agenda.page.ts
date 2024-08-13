@@ -23,18 +23,16 @@ export class AgendaPage implements OnInit {
   showForm = false;
   isEditMode = false;
   datai: any
-  dataf: any
+  dataf: any 
   dataResultado: any = []
   selectedEvents: any[] = []; 
-
+  spiner: any = false
 
 
   selectedEvent: CalendarEvent | null = null;
 
   events: CalendarEvent[] = [
-    { date: new Date(2024, 7, 23), type: 'meeting', title: 'Reunião com equipe', description: 'Discussão sobre o projeto XYZ.' },
-    { date: new Date(2024, 7, 23), type: 'holiday', title: 'Feriado Nacional', description: 'Feriado nacional comemorativo.' },
-    { date: new Date(2024, 7, 28), type: 'birthday', title: 'Aniversário de João', description: 'Festa de aniversário de João.' }
+    
   ];
   currentEvent: any;
 
@@ -44,9 +42,28 @@ export class AgendaPage implements OnInit {
 
   ngOnInit(): void {
     this.renderCalendar();
-    this.getDataAgenda();
+    this.getTodayDate();
+    this.getLastMonthDate();
     
-    
+  }
+
+  getLastMonthDate() {
+    const today = new Date();
+    const lastMonth = new Date(today.setMonth(today.getMonth() - 1));
+    this.datai = this.formatDate(lastMonth);
+  }
+
+  getTodayDate() {
+    const today = new Date();
+    this.dataf = this.formatDate(today);
+  }
+
+  formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // getMonth() retorna 0 para janeiro
+    const year = date.getFullYear();
+
+    return `${day}.${month}.${year}`;
   }
 
   convertToEventDate(dateString: string): Date {
@@ -82,23 +99,37 @@ export class AgendaPage implements OnInit {
   }
 
   async getDataAgenda(){  
-    this.datai = '01.01.2023'
-    this.dataf = '01.12.2024'
+    this.spiner = true;
+    console.log(this.spiner,'0')
+    let dataconverter1: any;
+    let dataconverter2: any;
+    dataconverter1 = this.datai;
+    dataconverter2 = this.dataf;
+    if (this.datai.length === 10) {
+      this.datai = dataconverter1.replace(/\//g, '.');
+    }
+    if (this.dataf.length === 10) {
+      this.dataf = dataconverter2.replace(/\//g, '.');
+    }
     
       try {
         await this.api.getAgendaEventos(this.datai, this.dataf).subscribe(response => {
+          
           this.dataResultado = response
           console.log(this.dataResultado)
-          
+          this.renderCalendar()
+          this.spiner = false;
+          console.log(this.spiner,'1')
         })
       } catch (error: any) {
-        
+        await this.renderCalendar()
+        this.spiner = false;
       } finally {
-        
+        await this.renderCalendar()
       }
   }
 
-  renderCalendar() {
+  async renderCalendar() {
     const month = this.currentDate.getMonth();
     const year = this.currentDate.getFullYear();
 
@@ -195,4 +226,6 @@ export class AgendaPage implements OnInit {
   handleCancel() {
     this.showForm = false;
   }
+
+ 
 }

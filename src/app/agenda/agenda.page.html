@@ -7,6 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-item>
+    <ion-input [(ngModel)]="datai" label="De" placeholder="DD/MM/AAAA"></ion-input>
+    <ion-input [(ngModel)]="dataf" label="Até"placeholder="DD/MM/AAAA" ></ion-input>
+  </ion-item>
   <ion-item style="margin-top: 5px;">
     <div class="calendar-container">
       <div class="calendar-header">
@@ -61,7 +65,8 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" (click)="loadEvents()">chamar</ion-button>
+  <ion-button expand="block" [disabled]="spiner" (click)="loadEvents()">buscar <ion-spinner *ngIf="spiner"></ion-spinner></ion-button>
+  
   <div *ngIf="showForm">
     <ion-card *ngFor="let item of selectedEvents">
       <ion-card-header>
@@ -80,8 +85,6 @@
         <ion-item>
           <ion-label>N. Part.: {{item.NUMEROPARTICIPANTES}}</ion-label>
         </ion-item>
-
-        <ion-button color="light" (click)="handleCancel()">fechar</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
