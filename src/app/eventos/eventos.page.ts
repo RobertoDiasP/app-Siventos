@@ -24,7 +24,9 @@ export class EventosPage implements OnInit {
   dataR: any;
   totalR: any;
   totalS: any;
-
+  spiner: any = false;
+  spinerDtail: any = false;
+  spinerFin: any = false;
 
   constructor(
     public Api: ApiService
@@ -33,30 +35,35 @@ export class EventosPage implements OnInit {
   ngOnInit() {
   }
 
-  pesquisar(){
+  async pesquisar(){
+    this.spiner = true
     if (this.selectedOption =='ano'){
       const anoNumeric = parseInt(this.evento); // Converte o nome para uppercase
-      this.Api.getEvento(anoNumeric,'vazio').subscribe(response => {
+      await this.Api.getEvento(anoNumeric,'vazio').subscribe(response => {
         this.dadosEvento = response
+        this.spiner = false
         console.log(response)
       });
     }else{
-      this.Api.getEvento('',this.evento).subscribe(response => {
+      await this.Api.getEvento('',this.evento).subscribe(response => {
         this.dadosEvento = response
         console.log(response)
+        this.spiner = false
       });
     }
     
   }
 
-  detailOpen(isOpen: boolean, codEvento: any){
+  async detailOpen(isOpen: boolean, codEvento: any){
     this.isDetail = isOpen
+    this.spinerDtail = true
     if(isOpen == true){
       console.log(codEvento)
-     this.Api.getPessoaEvento(codEvento).subscribe(response => {
+     await this.Api.getPessoaEvento(codEvento).subscribe(response => {
         this.pessoaEvento = response
         this.totalParticipantes = this.pessoaEvento.length;
         console.log(this.pessoaEvento)
+      this.spinerDtail = false
      })
      
     }
@@ -68,13 +75,14 @@ export class EventosPage implements OnInit {
     return number.toString();
   }
 
-  finanOpen(isOpen: boolean, codEvento: any) {
+  async finanOpen(isOpen: boolean, codEvento: any) {
+    this.spinerFin = true
     this.isFinanceiro = isOpen;
     if (isOpen) {
-      this.Api.getEventoFin(codEvento).subscribe(response => {
+      await this.Api.getEventoFin(codEvento).subscribe(response => {
         this.resultadoPesq = [];
         this.resultadoPesq = response;
-  
+        this.spinerFin = false
         this.dataQ = []; // Inicializa como array vazio
         this.dataR = []; // Inicializa como array vazio
   
@@ -105,7 +113,7 @@ export class EventosPage implements OnInit {
   
         console.log(this.dataQ, 'DATAQ', this.dataR, 'DATAR', 'aqui está os dados financeiros');
       }, error => {
-        // Lógica para tratar erros
+        this.spinerFin = false
         console.error('Erro ao buscar dados financeiros:', error);
       });
     }

@@ -28,10 +28,12 @@
 
   </ion-item>
   
-    <ion-button size="small" expand="block" (click)="pesquisar()">
+    <ion-button  [disabled]="spiner" size="small" expand="block" (click)="pesquisar()">
       Pesquisar
+      <ion-spinner  *ngIf="spiner"></ion-spinner>
     </ion-button>
-  
+    
+
 
 
   <ion-list>

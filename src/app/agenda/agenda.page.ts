@@ -44,7 +44,7 @@ export class AgendaPage implements OnInit {
     this.renderCalendar();
     this.getTodayDate();
     this.getLastMonthDate();
-    
+    this.getDataAgenda();
   }
 
   getLastMonthDate() {

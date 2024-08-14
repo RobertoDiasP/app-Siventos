@@ -19,6 +19,7 @@ export class PessoasPage implements OnInit {
   isModalOpen = false;
   isDetail = false
   data: any;
+  spiner: any = false
   cadastro = {
     RAZAOSOCIAL: '',
     STATUS: 'A',
@@ -52,18 +53,22 @@ export class PessoasPage implements OnInit {
     console.log(id)
   }
 
-  pesquisar() {
+  async pesquisar() {
+    this.spiner = true
     if (this.selectedOption == 'nome'){
       const nomeUppercase = this.nome.toUpperCase(); // Converte o nome para uppercase
-      this.Api.getPessoas(nomeUppercase).subscribe(response => {
+      await this.Api.getPessoas(nomeUppercase).subscribe(response => {
         this.dadopesquisa = response
+        this.spiner = false
       });
     }
     if (this.selectedOption == 'cpf'){
+
       this.cpf = this.nome
       console.log(this.cpf)
-      this.Api.getCPF(this.cpf).subscribe(response => {
+      await this.Api.getCPF(this.cpf).subscribe(response => {
         console.log(response);
+        this.spiner = false
         this.dadopesquisa = response
       });
     }
