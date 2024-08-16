@@ -27,49 +27,51 @@
     </ion-item>
   </ion-list>
 
-<ion-row style="padding: 50px;" >
-  
+  <ion-card style="max-width: 250px; margin: 0 auto; display: block; margin-top: 5px; margin-bottom: 5px;">
     <canvas id="myChart" width="200" height="100"></canvas>
-  
-
-</ion-row>
-  
-
-
+  </ion-card>
+    
+<ion-item lines="none" >
+  <div style="display: flex; justify-content: center; width: 100%;">
   <ion-button expand="block" color="success" (click)="toggleInfiniteScroll()">
     {{ showInfiniteScroll ? 'Esconder' : 'Mostrar' }} Quitadas
   </ion-button>
+  <ion-button expand="block" color="danger" (click)="toggleInfiniteScrollPagar()">
+    {{ showInfiniteScrollPagar ? 'Esconder' : 'Mostrar' }} Abertas
+  </ion-button>
+  </div>
+</ion-item>
 
   <div *ngIf="showInfiniteScroll">
-    <ion-list>
+    <ion-list style="background-color: rgb(220, 252, 228);">
       
         <ion-card *ngFor="let item of dataQ; let index = index">
           <ion-card-content>   
             <ion-row>
               <ion-col>
-                <ion-label>Empresa: {{ item.CODIGOEMPRESA }}</ion-label>
+                <ion-label><strong>Empresa:</strong> {{ item.CODIGOEMPRESA }}</ion-label>
               </ion-col>
               <ion-col>
-                <ion-label>Lançamento: {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
+                <ion-label><strong>Lançamento:</strong> {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
               </ion-col>
             </ion-row>
 
 
             <ion-row>
               <ion-col>
-                <ion-label>Total: {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
+                <ion-label><strong>Total:</strong> {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
               </ion-col>
               <ion-col>
-                <ion-label>Rec: {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
+                <ion-label><strong>Rec:</strong> {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
               </ion-col>
             </ion-row>
 
             <ion-row>
               <ion-col>
-                <ion-label>Tipo: {{ item.TIPO_COBRANCA }} </ion-label>    
+                <ion-label><strong>Tipo</strong>: {{ item.TIPO_COBRANCA }} </ion-label>    
               </ion-col>
               <ion-col>
-                <ion-label>Vec: {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
+                <ion-label><strong>Vec:</strong> {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
               </ion-col>
             </ion-row>
             
@@ -83,39 +85,37 @@
     </ion-infinite-scroll>
   </div>
 
-  <ion-button expand="block" color="danger" (click)="toggleInfiniteScrollPagar()">
-    {{ showInfiniteScrollPagar ? 'Esconder' : 'Mostrar' }} Abertas
-  </ion-button>
+  
 
   <div *ngIf="showInfiniteScrollPagar">
-    <ion-list>
+    <ion-list style="background-color: rgb(253, 235, 235);">
       <ion-card *ngFor="let item of dataR; let index = index">
         <ion-card-content>   
           <ion-row>
             <ion-col>
-              <ion-label>Empresa: {{ item.CODIGOEMPRESA }}</ion-label>
+              <ion-label><strong>Empresa:</strong> {{ item.CODIGOEMPRESA }}</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>Lançamento: {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
+              <ion-label><strong>Lançamento:</strong> {{  formatNumber(item.NUMEROCONTARECEBER) }}</ion-label>
             </ion-col>
           </ion-row>
 
 
           <ion-row>
             <ion-col>
-              <ion-label>Total: {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
+              <ion-label><strong>Total:</strong> {{ item.VLR_TOTAL | currency:'BRL':'symbol':'1.2-2'}}</ion-label>
             </ion-col>
             <ion-col>
-              <ion-label>Rec: {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
+              <ion-label><strong>Rec:</strong> {{ item.DT_RECEBIMENTO | date: 'dd/MM/yyyy' }}</ion-label>
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col>
-              <ion-label>Tipo: {{ item.TIPO_COBRANCA }} </ion-label>    
+              <ion-label><strong>Tipo:</strong> {{ item.TIPO_COBRANCA }} </ion-label>    
             </ion-col>
             <ion-col>
-              <ion-label>Vec: {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
+              <ion-label><strong>Vec:</strong> {{ item.DT_VENCIMENTO | date: 'dd/MM/yyyy' }} </ion-label>    
             </ion-col>
           </ion-row>
           

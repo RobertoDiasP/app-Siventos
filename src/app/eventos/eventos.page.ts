@@ -27,6 +27,8 @@ export class EventosPage implements OnInit {
   spiner: any = false;
   spinerDtail: any = false;
   spinerFin: any = false;
+  porcQ: any
+  porcR: any
 
   constructor(
     public Api: ApiService
@@ -107,10 +109,13 @@ export class EventosPage implements OnInit {
           const valorFormatado = parseFloat(parseFloat(soma.VLR_TOTAL).toFixed(2));
           this.totalR += valorFormatado;
         });
-  
+        
+        
+
         this.totalS = this.totalQ + this.totalR; // Soma os totais de Q e R
         this.createChart(); // Cria o gráfico com os dados atualizados
-  
+       
+
         console.log(this.dataQ, 'DATAQ', this.dataR, 'DATAR', 'aqui está os dados financeiros');
       }, error => {
         this.spinerFin = false
@@ -119,12 +124,14 @@ export class EventosPage implements OnInit {
     }
   }
 
-  private generateItems() {
+
+  calculaPorcentagem(){
+
+    
 
   }
 
   onIonInfinite(ev: any) {
-    this.generateItems();
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
@@ -144,11 +151,15 @@ export class EventosPage implements OnInit {
 
   createChart() {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
+    this.porcQ  = parseFloat(((this.totalQ * 100) / this.totalS).toFixed(2));
+    this.porcR  = parseFloat(((this.totalR * 100) / this.totalS).toFixed(2));
+    this.porcQ = this.porcQ + ''
+    this.porcR= this.porcR + ''
 
     new (window as any)['Chart'](ctx, {
       type: 'pie', // Altere o tipo do gráfico para 'pie'
       data: {
-        labels: ['Aberto', 'Quitado'],
+        labels: [this.porcR+ '% Aberto', this.porcQ +'% Quitado'],
         datasets: [{
           label: 'My Dataset',
           data: [this.totalR, this.totalQ], // Dados para cada segmento

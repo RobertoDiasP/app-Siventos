@@ -24,6 +24,8 @@ export class FinanceiroPage implements OnInit {
   totalR: any;
   totalQ: any;
   totalS: any;
+  porcQ: any;
+  porcR: any;
 
   constructor(private route: ActivatedRoute,
     public Api: ApiService,
@@ -104,11 +106,12 @@ export class FinanceiroPage implements OnInit {
 
   createChart() {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
-
+    this.porcQ  = parseFloat(((this.totalQ * 100) / this.totalS).toFixed(2));
+    this.porcR  = parseFloat(((this.totalR * 100) / this.totalS).toFixed(2));
     new (window as any)['Chart'](ctx, {
       type: 'pie', // Altere o tipo do gráfico para 'pie'
       data: {
-        labels: ['Aberto', 'Quitado'],
+        labels: [this.porcR+ '% Aberto', this.porcQ+ '% Quitado'],
         datasets: [{
           label: 'My Dataset',
           data: [this.totalR, this.totalQ], // Dados para cada segmento
